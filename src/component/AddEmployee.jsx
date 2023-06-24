@@ -8,13 +8,13 @@ const AddEmployee = () => {
   const [position, setposition] = useState("");
   const [location, setlocation] = useState("");
   const [salary, setsalary] = useState("");
-
+  const [phone, setphone] = useState("");
   function handleSubmit(event) {
     event.preventDefault();
-    const data = { fullName, position, location, salary };
+    const data = { fullName, position, location, salary, phone };
     console.log(data);
     axios
-      .post("http://localhost:8080/api/employees/", data)
+      .post("http://localhost:8080/api/employees/home", data)
       .then((res) => {
         console.log(res);
       })
@@ -42,7 +42,7 @@ const AddEmployee = () => {
           type="text"
           variant="outlined"
           color="secondary"
-          label="location"
+          label="Location"
           onChange={(e) => setlocation(e.target.value)}
           value={location}
           fullWidth
@@ -53,7 +53,7 @@ const AddEmployee = () => {
           type="text"
           variant="outlined"
           color="secondary"
-          label="position"
+          label="Position"
           onChange={(e) => setposition(e.target.value)}
           value={position}
           required
@@ -64,9 +64,20 @@ const AddEmployee = () => {
           type="text"
           variant="outlined"
           color="secondary"
-          label="salary"
+          label="Salary"
           onChange={(e) => setsalary(e.target.value)}
           value={salary}
+          fullWidth
+          required
+          sx={{ mb: 4 }}
+        />
+        <TextField
+          type="text"
+          variant="outlined"
+          color="secondary"
+          label="Phone"
+          onChange={(e) => setphone(e.target.value)}
+          value={phone}
           fullWidth
           required
           sx={{ mb: 4 }}

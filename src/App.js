@@ -3,6 +3,7 @@ import "./App.css";
 import AddEmployee from "./component/AddEmployee";
 import EditEmployee from "./component/EditEmployee";
 import Home from "./component/Home";
+import React, { useState } from "react";
 // import Delete from "./component/Delete";
 // import GetProduct from "./component/GetProduct";
 
@@ -11,6 +12,8 @@ import Login from "./component/login";
 import Signup from "./component/Signup";
 
 function App() {
+  const [user, setuser] = useState(null);
+  const [profile, setProfile] = useState(null);
   return (
     <div className="App">
       <BrowserRouter>
@@ -18,7 +21,7 @@ function App() {
         <Routes>
           <Route
             exact
-            path="/"
+            path="/home"
             element={
               <div className="row mt-5">
                 <AddEmployee />
@@ -30,7 +33,10 @@ function App() {
           {/* <Route path="/delete/:id" element={<Delete />} /> */}
           {/* The Particular Card i have to visit */}
           {/* <Route path="/card/:id" element={<GetProduct />} /> */}
-          <Route path="/login" element={<Login />} />
+          <Route
+            path="/"
+            element={<Login setuser={setuser} setProfile={setProfile} />}
+          />
           <Route path="/signup" element={<Signup />} />
         </Routes>
       </BrowserRouter>

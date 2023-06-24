@@ -1,7 +1,12 @@
+import { Button } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
+  const navigate = useNavigate();
+  const auth = localStorage.getItem("user");
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg shadow-lg p-3 mb-5 bg-white rounded">
@@ -23,16 +28,31 @@ export default function Navbar() {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
-                  <Link to="/login">Login</Link>
-                </a>
+                {auth ? (
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <div>
+                      {auth}
+                      {/* {navigate("/home")} */}
+                    </div>
+                    <div>
+                      <Button
+                        onClick={() => {
+                          localStorage.removeItem("user");
+                          navigate("/");
+                        }}
+                      >
+                        Log Out
+                      </Button>
+                    </div>
+                  </div>
+                ) : (
+                  <a className="nav-link active" aria-current="page" href="#">
+                    <Link to="/signup">SignUp</Link>
+                  </a>
+                )}
               </li>
 
-              <li className="nav-item">
-                <a className="nav-link" href="#">
-                  About us{" "}
-                </a>
-              </li>
+              {/* <li className="nav-item">{user.name}</li> */}
             </ul>
           </div>
         </div>

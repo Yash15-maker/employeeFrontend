@@ -24,9 +24,9 @@ function Signup() {
     } else {
       const data = { email: email, password: password, userType };
       axios
-        .post("http://localhost:8080/api/auth/signup", data)
+        .post("http://localhost:8080/api/auth/", data)
         .then((res) => {
-          navigate("/login");
+          navigate("/");
         })
         .catch((err) => {
           console.log(err, 20);
@@ -48,7 +48,7 @@ function Signup() {
         <h1> Signup PAGE</h1>
         <div>
           {" "}
-          <Link to="/login"> LOGIN </Link>{" "}
+          <Link to="/"> LOGIN </Link>{" "}
         </div>
         EMAIL -
         <input
