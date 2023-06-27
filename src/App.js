@@ -13,11 +13,11 @@ import Signup from "./component/Signup";
 
 function App() {
   const [user, setuser] = useState(null);
-  const [profile, setProfile] = useState(null);
+  // const [profile, setProfile] = useState(null);
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar />
+        <Navbar user={user} />
         <Routes>
           <Route
             exact
@@ -33,10 +33,7 @@ function App() {
           {/* <Route path="/delete/:id" element={<Delete />} /> */}
           {/* The Particular Card i have to visit */}
           {/* <Route path="/card/:id" element={<GetProduct />} /> */}
-          <Route
-            path="/"
-            element={<Login setuser={setuser} setProfile={setProfile} />}
-          />
+          <Route path="/" element={<Login setuser={setuser} />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>
       </BrowserRouter>

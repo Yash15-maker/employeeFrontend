@@ -3,10 +3,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-export default function Navbar() {
+export default function Navbar({ user }) {
   const navigate = useNavigate();
   const auth = localStorage.getItem("user");
-
+  const googleAuth = localStorage.getItem("googleuser");
+  // var name = user.name;
   return (
     <div>
       <nav className="navbar navbar-expand-lg shadow-lg p-3 mb-5 bg-white rounded">
@@ -28,16 +29,27 @@ export default function Navbar() {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
-                {auth ? (
-                  <div style={{ display: "flex", flexDirection: "column" }}>
-                    <div>
-                      {auth}
+                {auth || googleAuth ? (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      width: "20rem",
+                      justifyContent: "space-around",
+                    }}
+                  >
+                    <div style={{ padding: "0.95rem" }}>
+                      {auth || googleAuth.replace(/"([^"]+(?="))"/g, "$1")}
                       {/* {navigate("/home")} */}
                     </div>
-                    <div>
+                    <div style={{ padding: "0.7rem" }}>
                       <Button
                         onClick={() => {
-                          localStorage.removeItem("user");
+                          {
+                            auth
+                              ? localStorage.removeItem("user")
+                              : localStorage.removeItem("googleuser");
+                          }
                           navigate("/");
                         }}
                       >
@@ -51,8 +63,6 @@ export default function Navbar() {
                   </a>
                 )}
               </li>
-
-              {/* <li className="nav-item">{user.name}</li> */}
             </ul>
           </div>
         </div>

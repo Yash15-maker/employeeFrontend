@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 // // import jwt_decode from "jwt-decode";
 // import { LoginSocialFacebook } from "reactjs-social-login";
@@ -7,7 +7,7 @@ import axios from "axios";
 import { GoogleLoginButton } from "react-social-login-buttons";
 import { LoginSocialGoogle } from "reactjs-social-login";
 
-function Login({ setuser, setProfile }) {
+function Login({ setuser }) {
   // const [provider, setProvider] = useState("");
   // const handleSigninGoogle = (response) => {
   //   var userObject = jwt_decode(response.credential);
@@ -42,10 +42,10 @@ function Login({ setuser, setProfile }) {
     console.log(email, password);
     if (!email) {
       alert("Please enter your email");
-      navigate("/login");
+      navigate("/");
     } else if (!password) {
       alert("Please enter your password");
-      navigate("/login");
+      navigate("/");
     } else {
       const data = { email: email, password: password };
       axios
@@ -112,6 +112,11 @@ function Login({ setuser, setProfile }) {
           onResolve={(response) => {
             console.log(response);
             setuser(response.data);
+            navigate("/home");
+            localStorage.setItem(
+              "googleuser",
+              JSON.stringify(response.data.name)
+            );
           }}
           onReject={(err) => {
             console.log(err);
